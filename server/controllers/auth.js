@@ -1,5 +1,5 @@
-const users = require('../db/users.json');
 const bcrypt = require('bcryptjs');
+const users = []
 
 module.exports = {
     getAllUsers: (req, res) => {
