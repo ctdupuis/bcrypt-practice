@@ -8,6 +8,7 @@
 
 .flex-cont {
     display: flex;
+    margin-top: 2%;
 }
 
 .col {
@@ -19,5 +20,10 @@
 }
 
 .center-self {
+    align-self: center;
+}
+
+#clear {
+    width: 10%;
     align-self: center;
 }

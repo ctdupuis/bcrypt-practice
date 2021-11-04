@@ -1,31 +1,41 @@
 let newForm = document.getElementById('new-user');
-const baseUrl = `http://localhost:4000`
+let clear = document.getElementById('clear');
+const baseUrl = `http://localhost:4000`;
 
 getUsers = () => {
     axios.get(baseUrl)
     .then(res => res.data.forEach(user => {
-        renderUser(user)
+        renderUser(user);
     }))
 }
 
 createUser = userdata => {
     axios.post(baseUrl, {...userdata})
-    .then(res => renderUser(res.data))
+    .then(res => renderUser(res.data));
 }
 
 loginUser = userdata => {
     axios.post(`${baseUrl}/login`, {...userdata})
-    .then(res => console.log(res.data))
+    .then(res => console.log(res.data));
+}
+
+clearDB = () => {
+    axios.get(`${baseUrl}/clear`)
+    .then(res => console.log(res.data));
 }
 
 renderUser = user => {
     let html = 
     `
         <div class="user-card">
-            <h4>Username: ${user.username} </h4>
+            <h4 id=${user.username}>Username: ${user.username} </h4>
         </div>
     `
-    document.getElementById('user-cont').innerHTML += html
+    document.getElementById('user-cont').innerHTML += html;
+}
+
+removeUser = id => {
+    document.getElementById(id).remove();
 }
 
 
@@ -54,5 +64,6 @@ submitHandler = e => {
 
 
 
-document.addEventListener('DOMContentLoaded', getUsers)
-newForm.addEventListener("submit", submitHandler)
+document.addEventListener('DOMContentLoaded', getUsers);
+newForm.addEventListener("submit", submitHandler);
+clear.addEventListener("click", clearDB);
