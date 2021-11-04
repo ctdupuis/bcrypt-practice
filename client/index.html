@@ -17,16 +17,23 @@
         <div class="flex-cont col">
             <form id="user" class="center-self">
     
-                <input type="text" placeholder="Username" />
+                <input id="username" type="text" placeholder="Username" />
     
-                <input type="password" placeholder="Password" />
+                <input id="password" type="password" placeholder="Password" />
     
                 <button type="submit">Submit</button>
             </form>
         </div>
 
+        <div class="flex-cont centered">
+            <div id="user-cont">
+                <h3>A list of users</h3>
+            </div>
+        </div>
+
     </div>
 
 </body>
+<script src="../node_modules/axios/dist/axios.min.js"></script>
 <script src="main.js"></script>
 </html>

@@ -1,8 +1,14 @@
 [
     {
-        "username": "cody"
+        "username": "Cody",
+        "password": "dev"
     },
     {
-        "username": "tim"
+        "username": "Tim",
+        "password": "mount"
+    },
+    {
+        "username": "Marcus",
+        "password": "dad"
     }
 ]
