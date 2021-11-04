@@ -7,11 +7,12 @@ app.use(express.json());
 app.use(cors());
 
 const {
-    getAllUsers
+    getAllUsers,
+    createUser
 } = require('./controllers/auth');
 
 app.get('/', getAllUsers);
-
+app.post('/', createUser)
 
 const PORT = process.env.port || 4000;
 

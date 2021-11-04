@@ -1,23 +1,27 @@
+let newForm = document.getElementById('new-user');
+
 getUsers = () => {
     axios.get('http://localhost:4000')
-    .then(res => renderUsers(res.data))
+    .then(res => res.data.forEach(user => {
+        renderUser(user)
+    }))
 }
 
-renderUsers = users => {
-    return users.map(user => {
-        let html = 
-        `
-            <div class="user-card">
-                <h4>Username: ${user.username} </h4>
-            </div>
-        `
-        document.getElementById('user-cont').innerHTML += html
-    })
+createUser = userdata => {
+    axios.post('http://localhost:4000', {...userdata})
+    .then(res => renderUser(res.data))
 }
 
-document.addEventListener('DOMContentLoaded', getUsers)
+renderUser = user => {
+    let html = 
+    `
+        <div class="user-card">
+            <h4>Username: ${user.username} </h4>
+        </div>
+    `
+    document.getElementById('user-cont').innerHTML += html
+}
 
-let form = document.querySelector('form');
 
 submitHandler = e => {
     let username = document.getElementById('username').value;
@@ -27,10 +31,16 @@ submitHandler = e => {
         username: username,
         password: password
     }
+    if (e.target.id === 'new-user') {
+        createUser(userdata)
+    }
     console.log(`Username: ${username} | Password: ${password}`);
     
     username.value = '';
     password.value = '';
 }
 
-form.addEventListener("submit", submitHandler)
+
+
+document.addEventListener('DOMContentLoaded', getUsers)
+newForm.addEventListener("submit", submitHandler)
