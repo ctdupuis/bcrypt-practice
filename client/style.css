@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+}
+
+.wrapper {
+    padding: 5%;
+}
+
+.flex-cont {
+    display: flex;
+}
+
+.col {
+    flex-direction: column;
+}
+
+.centered {
+    justify-content: center;
+}
+
+.center-self {
+    align-self: center;
+}
