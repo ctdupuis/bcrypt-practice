@@ -45,6 +45,7 @@ submitHandler = e => {
     if (e.submitter.id === 'login') {
         loginUser(userdata)
     }
+    
     console.log(`Username: ${username} | Password: ${password}`);
     
     username.value = '';
