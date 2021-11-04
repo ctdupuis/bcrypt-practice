@@ -1,4 +1,5 @@
 const users = require('../db/users.json');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
     getAllUsers: (req, res) => {
@@ -8,5 +9,9 @@ module.exports = {
         const newUser = {...req.body};
         users.push(newUser);
         res.status(200).send(newUser);
+    },
+    loginUser: (req, res) => {
+        let target = users.find(user => user.username === req.body.username)
+        res.status(200).send(target)
     }
 }

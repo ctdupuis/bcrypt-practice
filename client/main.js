@@ -1,15 +1,21 @@
 let newForm = document.getElementById('new-user');
+const baseUrl = `http://localhost:4000`
 
 getUsers = () => {
-    axios.get('http://localhost:4000')
+    axios.get(baseUrl)
     .then(res => res.data.forEach(user => {
         renderUser(user)
     }))
 }
 
 createUser = userdata => {
-    axios.post('http://localhost:4000', {...userdata})
+    axios.post(baseUrl, {...userdata})
     .then(res => renderUser(res.data))
+}
+
+loginUser = userdata => {
+    axios.post(`${baseUrl}/login`, {...userdata})
+    .then(res => console.log(res.data))
 }
 
 renderUser = user => {
@@ -31,8 +37,13 @@ submitHandler = e => {
         username: username,
         password: password
     }
-    if (e.target.id === 'new-user') {
+
+    if (e.submitter.id === 'create') {
         createUser(userdata)
+    }
+
+    if (e.submitter.id === 'login') {
+        loginUser(userdata)
     }
     console.log(`Username: ${username} | Password: ${password}`);
     

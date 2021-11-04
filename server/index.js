@@ -8,11 +8,13 @@ app.use(cors());
 
 const {
     getAllUsers,
-    createUser
+    createUser,
+    loginUser
 } = require('./controllers/auth');
 
 app.get('/', getAllUsers);
 app.post('/', createUser)
+app.post('/login', loginUser)
 
 const PORT = process.env.port || 4000;
 
