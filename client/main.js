@@ -21,14 +21,20 @@ loginUser = userdata => {
 
 clearDB = () => {
     axios.get(`${baseUrl}/clear`)
-    .then(res => console.log(res.data));
+    .then(res => {
+        let headings = document.getElementsByClassName('user-h');
+        for (let i = 0; i < headings.length; i++) {
+            headings[i].remove();
+        }
+        console.log(res.data);
+    });
 }
 
 renderUser = user => {
     let html = 
     `
         <div class="user-card">
-            <h4 id=${user.username}>Username: ${user.username} </h4>
+            <h4 class="user-h" id=${user.username}>Username: ${user.username} </h4>
         </div>
     `
     document.getElementById('user-cont').innerHTML += html;
