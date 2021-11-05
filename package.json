@@ -20,6 +20,10 @@
   "homepage": "https://github.com/ctdupuis/brcypt-practice#readme",
   "dependencies": {
     "axios": "^0.24.0",
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.14",
+    "uniqid": "^5.4.0"
   }
 }
