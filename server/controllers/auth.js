@@ -1,35 +1,34 @@
-const bcrypt = require('bcryptjs');
-let users = [];
+const User = require('../../models/user.js')
 
 module.exports = {
     getAllUsers: (req, res) => {
-        res.status(200).send(users);
+        res.status(200).send(User.all);
     },
     createUser: (req, res) => {
         let { username, password } = req.body;
-        const salt = bcrypt.genSaltSync(6);
-        const passHash = bcrypt.hashSync(password, salt);
-        const newUser = {
-            username: username,
-            password: passHash
-        }
-        users.push(newUser);
+
+        const newUser = new User(username, password);
+
         let safeUser = {...newUser};
         delete safeUser.password;
+
         res.status(200).send(safeUser);
     },
     loginUser: (req, res) => {
         let { username, password } = req.body;
-        let targetUser = users.find(user => user.username === username);
-        const authenticated = bcrypt.compareSync(password, targetUser.password);
-        let safeUser = {...targetUser}
-        if (authenticated) {
+
+        let targetUser = User.all.find(user => user.username === username);
+
+        if (targetUser && targetUser.authenticate(password)) {
+            let safeUser = {...targetUser}
             delete safeUser.password
+            res.status(200).send(safeUser);
+        } else {
+            res.status(404).send("User not found.")
         }
-        res.status(200).send(safeUser);
     },
     clear: (req, res) => {
-        users = [];
+        User.clearAll();
         res.status(200).send("DB Succesfully cleared");
     }
 }
